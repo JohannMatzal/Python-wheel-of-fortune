@@ -1,9 +1,3 @@
-###############################################################################
-# Author: Johann Matzal
-# Date: 4/29/2021
-# Description: This program calculates how often each letter of the alphabet
-# appears in the phrases used for Wheel of Fortune.
-###############################################################################
 import matplotlib.pyplot as plt
 
 def get_letters():
