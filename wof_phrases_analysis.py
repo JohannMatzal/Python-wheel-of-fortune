@@ -1,28 +1,33 @@
 import matplotlib.pyplot as plt
 
+filepath = './phrases.txt'
+letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
 def get_letters():
-    with open('./phrases.txt') as doc:
-        lines = doc.read()
-    letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-    letter_list = []
-    for n in list(lines):
-        if n.upper() in letters:
-            letter_list.append(n.upper())
-    return letter_list #returns a list of only letters
+    """Returns a list of only letters, removing all punctuation, spaces, etc."""
+    try:
+        with open(filepath, 'r') as doc:
+            lines = doc.read()
+        letter_list = [n.upper() for n in lines if n.upper() in letters]
+        return letter_list
+
+    except FileNotFoundError:
+        print(f'Error: The file {filepath} was not found.')
+
 
 def main():
     letter_list = get_letters()
+    total_letters = len(letter_list)
+    x = list(letters)
+    y = [letter_list.count(letter)/total_letters for letter in x] # counts the number of times each letter appears in the letter list, and then divides it by the total number of letters
+
     fig, ax = plt.subplots()
-    x = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
-    y = []
-    for n in x:
-        frequency = letter_list.count(n)/len(letter_list) #counts the # of times each letter appears in the letter list, and then divides it by the total # of letters
-        y.append(frequency)
-    ax.bar(x, y)
-    ax.grid()
-    ax.set_title('Letter Frequency in Puzzle Phrases')
+    ax.bar(x, y, color = 'darkcyan', edgecolor = 'black')
+    ax.grid(True, which = 'both', linestyle = '--')
+    ax.set_title('Letter Frequency in phrases.txt', fontweight = 'bold')
     ax.set_xlabel('Letter')
     ax.set_ylabel('Letter Appearance Frequency')
+    plt.show()
+
 if __name__ == '__main__':
     main()
-    plt.show()
