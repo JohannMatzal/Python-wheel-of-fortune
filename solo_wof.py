@@ -1,21 +1,27 @@
 import random as r
 import math as m
 
+
 def get_phrase():
-    with open('./phrases.txt') as doc:
+    """Fetch a random phrase from the phrases file."""
+    with open('C:/Users/hansm/OneDrive/Documents/Coding/Python/phrases.txt') as doc:
         lines = doc.read().split('\n')
     lines.pop()
     random_number = m.floor(r.random()*len(lines))
     phrase = lines[random_number]
     return phrase
 
+
 def spin_the_wheel():
+    """Simulates spinning the wheel."""
     wheel_list = [500, 500, 500, 500, 500, 550, 600, 600, 600, 600, 650, 650, 650, 700, 700, 700, 800, 900, 2500, 'BANKRUPT', 'BANKRUPT']
     random_number = m.floor(r.random()*21)
     spin = wheel_list[random_number]
     return spin
 
+
 def get_board(round_number, board_list, round_consonants, round_vowels, balance):
+    """Prints the current state of the board."""
     round_consonant_string = ""
     round_vowel_string = ""
     board = ""
@@ -32,7 +38,9 @@ def get_board(round_number, board_list, round_consonants, round_vowels, balance)
     print(f"::   {round_consonant_string}   ::   {round_vowel_string}   ::{text.rjust(11)} ::")
     print("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::")
 
+
 def setup():
+    """Re-initializes the game's state for a new round."""
     balance = 0
     round_consonants = 'BCDFGHJKLMNPQRSTVWXYZ'
     round_vowels = 'AEIOU'
@@ -46,7 +54,9 @@ def setup():
             board_list.append(n)
     return phrase_list, original_phrase, board_list, round_consonants, round_vowels, balance
 
+
 def option():
+    """Prompts the user for an action."""
     print("What would you like to do?")
     print("  1 - Spin the wheel")
     print("  2 - Buy a vowel")
@@ -63,7 +73,9 @@ def option():
         selection = input("Enter the number of your choice: ")
     return selection
 
+
 def choice_1(phrase_list, board_list, round_consonants, round_vowels, balance):
+    """Handles the spin the wheel action."""
     consonants = ['B','C','D','F','G','H','J','K','L','M','N','P','Q','R','S','T','V','W','X','Y','Z']
     if round_consonants == '                     ':
         print("There are no more consonants to choose.")
@@ -108,6 +120,7 @@ def choice_1(phrase_list, board_list, round_consonants, round_vowels, balance):
 
 
 def choice_2(phrase_list, board_list, round_consonants, round_vowels, balance):
+    """Handles the buy a vowel action."""
     vowels = ['A','E','I','O','U']
     if balance < 250:
         print("You need at least $250 to buy a vowel.")
@@ -144,7 +157,9 @@ def choice_2(phrase_list, board_list, round_consonants, round_vowels, balance):
         round_vowels = round_vowels.replace(selected_vowel, ' ')
     return phrase_list, board_list, round_consonants, round_vowels, balance
 
+
 def choice_3(phrase_list, original_phrase, board_list, balance, total):
+    """Handles the solve the puzzle action."""
     board = ""
     for n in board_list:
         board += n
@@ -167,7 +182,9 @@ def choice_3(phrase_list, original_phrase, board_list, balance, total):
         print(f'You earned ${balance:,} this round.')
     return phrase_list, original_phrase, board_list, balance, total
 
+
 def main():
+    """Main game loop."""
     total = 0
     quitter = 0
 
