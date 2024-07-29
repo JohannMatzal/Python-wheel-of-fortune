@@ -1,7 +1,7 @@
-import matplotlib.pyplot as plt
-
+import matplotlib.pyplot as pl
 filepath = './phrases.txt'
 letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
 
 def get_letters():
     """Returns a list of only letters, removing all punctuation, spaces, etc."""
@@ -28,6 +28,7 @@ def main():
     ax.set_xlabel('Letter')
     ax.set_ylabel('Letter Appearance Frequency')
     plt.show()
+
 
 if __name__ == '__main__':
     main()
