@@ -4,7 +4,7 @@ import math as m
 
 def get_phrase():
     """Fetch a random phrase from the phrases file."""
-    with open('C:/Users/hansm/OneDrive/Documents/Coding/Python/phrases.txt') as doc:
+    with open('./phrases.txt') as doc:
         lines = doc.read().split('\n')
     lines.pop()
     random_number = m.floor(r.random()*len(lines))
